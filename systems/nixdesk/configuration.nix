@@ -55,7 +55,12 @@
       osu-lazer-bin
     ];
   };
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
 
@@ -77,6 +82,15 @@
     "KWIN_X11_NO_SYNC_TO_VBLANK" = 1;
     "KWIN_X11_REFRESH_RATE" = 144000;
     "KWIN_X11_FORCE_SOFTWARE_VSYNC" = 1;
+  };
+  systemd.services.apply-nvidia = {
+    description = "nvidia-settings apply";
+    enable = true;
+    serviceConfig = {Type = "oneshot";};
+    script = "${config.hardware.nvidia.package.settings}/bin/nvidia-settings --load-config-only";
+    environment = {DISPLAY = ":0";};
+    after = ["plasma-plasmashell.service"];
+    wantedBy = ["plasma-workspace.target"];
   };
 
   nixpkgs.config.allowUnfree = true;
