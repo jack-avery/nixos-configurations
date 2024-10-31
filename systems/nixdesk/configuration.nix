@@ -52,6 +52,7 @@
       obs-studio
       prismlauncher
       vesktop
+      osu-lazer-bin
     ];
   };
   programs.steam.enable = true;
