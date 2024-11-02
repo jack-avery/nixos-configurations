@@ -2,7 +2,7 @@
 
 [NixOS](https://nixos.org) is a Linux distribution managed using a fully declarative package manager. I do a lot of [remote stuff](https://github.com/jack-avery/ansible-tf2network), so having ways to manage an entire environment declaratively sounds like a wonderful idea to me.
 
-I also have had a wonderful experience using NixOS so far aside, from some video games that block Linux altogether.
+I also have had a wonderful experience using NixOS so far aside from some video games that block Linux altogether.
 
 # How?
 
