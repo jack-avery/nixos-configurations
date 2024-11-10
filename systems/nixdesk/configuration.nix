@@ -20,6 +20,7 @@
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.desktopManager.xfce4.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -45,7 +46,6 @@
       flatpak
       gnome-software
       librewolf
-      krita
       kitty
       shotcut
       vlc
@@ -53,6 +53,7 @@
       prismlauncher
       vesktop
       osu-lazer-bin
+      pinta
     ];
   };
   programs.steam = {
