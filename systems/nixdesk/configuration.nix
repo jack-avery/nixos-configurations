@@ -102,6 +102,7 @@
     vim
     git
     xdg-desktop-portal
+    fluidsynth
   ];
 
   system.stateVersion = "24.05";
