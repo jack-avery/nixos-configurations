@@ -100,8 +100,8 @@
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     vim
-    xdg-desktop-portal-kde
     git
+    xdg-desktop-portal
   ];
 
   system.stateVersion = "24.05";
