@@ -19,7 +19,6 @@
   services.xserver.enable = true;
 
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
 
   # Configure keymap in X11
@@ -54,6 +53,7 @@
       vesktop
       osu-lazer-bin
       pinta
+      kdePackages.spectacle
     ];
   };
   programs.steam = {
