@@ -54,6 +54,7 @@
       osu-lazer-bin
       pinta
       kdePackages.spectacle
+      libreoffice
     ];
   };
   programs.steam = {
