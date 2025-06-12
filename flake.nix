@@ -2,7 +2,7 @@
   description = "my nixos stations configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -13,10 +13,13 @@
     ...
   }: let
     system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     nixosConfigurations = {
       nixdesk = nixpkgs.lib.nixosSystem {
-        inherit system;
         modules = [
           ./globals/all.nix
           ./systems/nixdesk/configuration.nix
@@ -25,7 +28,6 @@
     };
 
     homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
-      pkgs = (import nixpkgs) {inherit system;};
       modules = [./homes/jack/home.nix];
     };
   };

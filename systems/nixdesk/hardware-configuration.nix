@@ -14,6 +14,10 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
+  boot.kernelParams = [
+    "video=DP-1:1920x1080@144"
+    "video=HDMI-A-1:1920x1080@60"
+  ];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -27,9 +31,10 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  fileSystems."/mnt/games1" = {
-    device = "/dev/disk/by-uuid/dc908b0d-4ca9-4460-b7d9-3406bcc1f127";
-    fsType = "ext4";
+  fileSystems."/run/media/jack/T7" = {
+    device = "/dev/disk/by-uuid/A07D-29EF";
+    fsType = "exfat";
+    options = ["fmask=0077" "dmask=0077" "uid=1000" "gid=100"];
   };
 
   swapDevices = [];
