@@ -37,6 +37,11 @@
     options = ["fmask=0077" "dmask=0077" "uid=1000" "gid=100"];
   };
 
+  fileSystems."/run/media/jack/ArchDisk" = {
+    device = "/dev/disk/by-uuid/b2c62987-cc15-42a9-a8b7-6e3a421f7ea6";
+    fsType = "ext4";
+  };
+
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
