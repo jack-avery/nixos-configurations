@@ -23,7 +23,7 @@
   services.desktopManager.plasma6.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
-    oxygen
+    discover
   ];
 
   # Configure keymap in X11
@@ -36,7 +36,6 @@
   services.libinput.mouse.middleEmulation = false;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -50,9 +49,8 @@
     description = "jack";
     extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
-      swayfx
+      bibata-cursors
       flatpak
-      gnome-software
       kitty
       librewolf
       shotcut
@@ -64,6 +62,7 @@
       pinta
       kdePackages.spectacle
       libreoffice
+      gpu-screen-recorder-gtk
     ];
   };
   programs.steam = {
@@ -74,7 +73,19 @@
     ];
   };
   programs.gamemode.enable = true;
+
+  # have docker, but disabled by default
   virtualisation.docker.enable = true;
+  systemd.services.docker = {
+    wantedBy = pkgs.lib.mkForce [];
+    stopIfChanged = pkgs.lib.mkForce true;
+  };
+
+  # systemd waits for dhcp, but i have nothing that depends on networking
+  systemd.services.NetworkManager-wait-online = {
+    wantedBy = pkgs.lib.mkForce [];
+    stopIfChanged = pkgs.lib.mkForce true;
+  };
 
   hardware.graphics = {
     enable = true;
@@ -110,7 +121,6 @@
     vim
     git
     xdg-desktop-portal
-    fluidsynth
   ];
 
   services.logrotate.checkConfig = false;
