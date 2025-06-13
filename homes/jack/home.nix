@@ -103,7 +103,7 @@
       }
 
       PROMPT_COMMAND='RC_COLOR=$(rc_color);GITPS1=$(git_ps1)'
-      PS1=' \001\033[0;33m\002\W\001\033[0;35m\002''${GITPS1} \001''${RC_COLOR}\002\$ \001\033[0m\002'
+      PS1=' \001\033[0;33m\002\u\001\033[0m\002@\001\033[0;33m\002\h \W\001\033[0;35m\002''${GITPS1} \001''${RC_COLOR}\002\$ \001\033[0m\002'
     '';
 
     shellAliases = {
@@ -111,15 +111,15 @@
       ll = "ls -ahl";
       l = "ls -Ahl";
       c = "cd ..";
-      "cd.." = "cd ..";
       v = "nvim";
+      ssha = "eval `ssh-agent -s` && ssh-add";
     };
   };
 
   programs.neovim = {
     enable = true;
-    vimAlias = true;
-    viAlias = true;
+    vimAlias = false;
+    viAlias = false;
     defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
@@ -133,6 +133,8 @@
       cmp-vsnip
       vim-vsnip
       trouble-nvim
+      plenary-nvim
+      telescope-nvim
     ];
 
     extraLuaConfig = ''
@@ -170,6 +172,7 @@
       vim.opt.belloff="all"
       vim.opt.paste=false
       vim.opt.modifiable=true
+      vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
 
       -- Indentation
       vim.opt.shiftwidth=4
