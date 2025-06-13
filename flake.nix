@@ -28,6 +28,7 @@
     };
 
     homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
       modules = [./homes/jack/home.nix];
     };
   };
