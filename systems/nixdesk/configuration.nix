@@ -11,7 +11,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixdesk";
-  networking.networkmanager.enable = true;
+  networking.dhcpcd.enable = true;
 
   time.timeZone = "Canada/Eastern";
   i18n.defaultLocale = "en_CA.UTF-8";
@@ -19,6 +19,12 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    settings = {
+      Theme = {
+        CursorTheme = "Bibata-Modern-Classic";
+        CursorSize = 32;
+      };
+    };
   };
   services.desktopManager.plasma6.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -49,7 +55,6 @@
     description = "jack";
     extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
-      bibata-cursors
       flatpak
       librewolf
       shotcut
@@ -117,12 +122,6 @@
     stopIfChanged = pkgs.lib.mkForce true;
   };
 
-  # systemd waits for dhcp, but i have nothing that depends on networking
-  systemd.services.NetworkManager-wait-online = {
-    wantedBy = pkgs.lib.mkForce [];
-    stopIfChanged = pkgs.lib.mkForce true;
-  };
-
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -157,6 +156,9 @@
     vim
     git
     xdg-desktop-portal
+    bibata-cursors
+    xsettingsd
+    xorg.xrdb
   ];
 
   services.logrotate.checkConfig = false;

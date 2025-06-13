@@ -2,7 +2,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  theme = "Breeze-Dark";
+  iconTheme = "Gruvbox-Plus-Dark";
+  cursorTheme = "Bibata-Modern-Classic";
+  cursorSize = 32;
+in {
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
@@ -11,6 +16,35 @@
     "$HOME/.local/bin"
     "/usr/local/bin"
   ];
+
+  home.pointerCursor = {
+    name = cursorTheme;
+    package = pkgs.bibata-cursors;
+    gtk.enable = true;
+    size = cursorSize;
+  };
+
+  gtk = {
+    enable = true;
+    theme.name = theme;
+    iconTheme.name = iconTheme;
+    cursorTheme = {
+      size = cursorSize;
+      name = cursorTheme;
+    };
+    gtk3 = {
+      bookmarks = [
+        "file:///tmp"
+      ];
+      extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+  };
+  dconf.settings."org/gtk/settings/file-chooser" = {
+    sort-directories-first = true;
+  };
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+  };
 
   home.packages = with pkgs; [
     zip
@@ -32,6 +66,10 @@
     ethtool
     pciutils
     usbutils
+
+    # desktop
+    gruvbox-plus-icons
+    bibata-cursors
 
     # lsp, fmt
     cargo
