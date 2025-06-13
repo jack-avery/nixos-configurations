@@ -58,7 +58,7 @@
       prismlauncher
       vesktop
       osu-lazer-bin
-      pinta
+      gimp3
       kdePackages.spectacle
       libreoffice
       gpu-screen-recorder-gtk
