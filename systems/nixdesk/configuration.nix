@@ -51,7 +51,6 @@
     packages = with pkgs; [
       bibata-cursors
       flatpak
-      kitty
       librewolf
       shotcut
       vlc
@@ -63,6 +62,43 @@
       kdePackages.spectacle
       libreoffice
       gpu-screen-recorder-gtk
+      (stdenv.mkDerivation
+        {
+          name = "st-0.8.3";
+          src = pkgs.fetchFromGitHub {
+            owner = "jack-avery";
+            repo = "st";
+            rev = "6f1a64713c4adb57ec049f6f84351f71bf3b1931";
+            hash = "sha256-pUbg3n4AaBQGYKN5NBH4pyBUezby5GyPq9yeXOu/GbI=";
+          };
+
+          nativeBuildInputs = with pkgs; [
+            ncurses # for tic
+            pkg-config
+          ];
+
+          buildInputs = with pkgs.xorg; [
+            libX11
+            libXft
+          ];
+
+          # activate my config
+          configurePhase = "mv config.my.h config.h";
+
+          buildPhase = ''
+            export HOME=$(pwd)
+            make
+          '';
+
+          installPhase = "make install PREFIX=$out";
+
+          postInstall = ''
+            rm $out/share/man/man1/st.1
+            ln -s ../man1/st-terminfo.1 $out/share/man/man1/st.1
+            rm $out/share/man/man1/infocmp.1
+            ln -s ../man1/st-terminfo.1 $out/share/man/man1/infocmp.1
+          '';
+        })
     ];
   };
   programs.steam = {
