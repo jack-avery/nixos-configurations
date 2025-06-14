@@ -10,7 +10,6 @@
   outputs = {
     nixpkgs,
     home-manager,
-    plasma-manager,
     ...
   }: let
     system = "x86_64-linux";
