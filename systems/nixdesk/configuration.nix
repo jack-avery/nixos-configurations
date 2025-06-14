@@ -56,6 +56,7 @@
     extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       flatpak
+      lutris
       librewolf
       shotcut
       vlc

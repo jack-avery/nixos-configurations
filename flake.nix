@@ -4,12 +4,15 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager";
+    plasma-manager.url = "github:nix-community/plasma-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    plasma-manager,
     ...
   }: let
     system = "x86_64-linux";
@@ -29,7 +32,10 @@
 
     homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [./homes/jack/home.nix];
+      modules = [
+        plasma-manager.homeManagerModules.plasma-manager
+        ./homes/jack/home.nix
+      ];
     };
   };
 }
