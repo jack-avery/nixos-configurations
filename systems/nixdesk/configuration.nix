@@ -18,7 +18,6 @@
 
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
     settings = {
       Theme = {
         CursorTheme = "Bibata-Modern-Classic";
@@ -29,7 +28,7 @@
   services.desktopManager.plasma6.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
-    discover
+    oxygen
   ];
 
   # Configure keymap in X11
@@ -59,6 +58,7 @@
       lutris
       librewolf
       shotcut
+      joplin-desktop
       vlc
       obs-studio
       prismlauncher

@@ -5,8 +5,6 @@
 }: let
   theme = "Breeze-Dark";
   iconTheme = "Gruvbox-Plus-Dark";
-  cursorTheme = "Bibata-Modern-Classic";
-  cursorSize = 24;
 in {
   home.username = "jack";
   home.homeDirectory = "/home/jack";
@@ -17,22 +15,10 @@ in {
     "/usr/local/bin"
   ];
 
-  home.pointerCursor = {
-    name = cursorTheme;
-    package = pkgs.bibata-cursors;
-    gtk.enable = true;
-    x11.enable = true;
-    size = cursorSize;
-  };
-
   gtk = {
     enable = true;
     theme.name = theme;
     iconTheme.name = iconTheme;
-    cursorTheme = {
-      size = cursorSize;
-      name = cursorTheme;
-    };
     gtk3 = {
       bookmarks = [
         "file:///tmp"
@@ -57,6 +43,9 @@ in {
     tree
 
     btop
+    inxi
+    fastfetch
+    wl-clipboard
 
     strace
     ltrace
@@ -67,17 +56,19 @@ in {
     ethtool
     pciutils
     usbutils
+    tmux
 
     # desktop
     gruvbox-plus-icons
     bibata-cursors
 
-    # lsp, fmt
+    # rust ls
     cargo
     rustc
     rustfmt
     rust-analyzer
 
+    # python ls
     (python3.withPackages (ps:
       with ps; [
         python-lsp-server
@@ -90,8 +81,16 @@ in {
         black
       ]))
 
+    # nix ls
     nil
     alejandra
+
+    # go ls
+    gopls
+
+    # lua ls
+    lua-language-server
+    stylua
   ];
 
   programs.git = {
@@ -174,6 +173,7 @@ in {
       trouble-nvim
       plenary-nvim
       telescope-nvim
+      gitsigns-nvim
     ];
 
     extraLuaConfig = ''
