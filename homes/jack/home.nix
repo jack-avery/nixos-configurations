@@ -41,6 +41,7 @@ in {
     file
     which
     tree
+    ripgrep
 
     btop
     inxi
@@ -92,6 +93,27 @@ in {
     lua-language-server
     stylua
   ];
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        size = 10.0;
+        normal = {
+          family = "JetBrainsMono NF";
+          style = "Regular";
+        };
+      };
+      window = {
+        opacity = 0.95;
+        dimensions = {
+          lines = 24;
+          columns = 110;
+        };
+      };
+    };
+    theme = "catppuccin_mocha";
+  };
 
   programs.git = {
     enable = true;
@@ -150,6 +172,8 @@ in {
       l = "ls -Ahl";
       c = "cd ..";
       v = "nvim";
+      neofetch = "fastfetch";
+      doas = "sudo";
       ssha = "eval `ssh-agent -s` && ssh-add";
     };
   };
