@@ -34,6 +34,8 @@ in {
   };
 
   home.packages = with pkgs; [
+    pkgs.nixgl.auto.nixGLDefault
+
     zip
     unzip
     xz
@@ -96,6 +98,7 @@ in {
 
   programs.alacritty = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.alacritty;
     settings = {
       font = {
         size = 10.0;
