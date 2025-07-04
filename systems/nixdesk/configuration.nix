@@ -68,6 +68,7 @@
       kdePackages.spectacle
       libreoffice
       gpu-screen-recorder-gtk
+      easyeffects
     ];
   };
   programs.steam = {
