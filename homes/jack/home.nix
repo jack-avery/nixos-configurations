@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   theme = "Breeze-Dark";
@@ -14,6 +15,10 @@ in {
     "$HOME/.local/bin"
     "/usr/local/bin"
   ];
+
+  nixGL.packages = inputs.nixGL.packages;
+  nixGL.defaultWrapper = "mesa";
+  nixGL.installScripts = ["mesa"];
 
   gtk = {
     enable = true;
@@ -34,8 +39,6 @@ in {
   };
 
   home.packages = with pkgs; [
-    pkgs.nixgl.auto.nixGLDefault
-
     zip
     unzip
     xz
@@ -136,7 +139,11 @@ in {
 
   programs.bash = {
     enable = true;
-    enableCompletion = true;
+
+    # enabling completion causes some weird errors on non-NixOS machines?
+    # unknown command 'have'
+    # spent about 2 hours debugging, this solved the issue, and completion continues to function
+    enableCompletion = false;
 
     bashrcExtra = ''
       if [ -f '~/git/google-cloud-sdk/path.bash.inc' ]; then . '~/git/google-cloud-sdk/path.bash.inc'; fi

@@ -9,11 +9,12 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     nixGL,
     ...
-  }: let
+  }@inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -32,6 +33,7 @@
 
     homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
+      extraSpecialArgs = {inherit inputs;};
       modules = [
         ./homes/jack/home.nix
       ];
