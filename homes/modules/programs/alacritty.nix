@@ -1,8 +1,18 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  home.packages = with pkgs; [
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+  ];
+
+  nixGL.packages = inputs.nixGL.packages;
+  nixGL.defaultWrapper = "mesa";
+  nixGL.installScripts = ["mesa"];
+
   programs.alacritty = {
     enable = true;
     package = config.lib.nixGL.wrap pkgs.alacritty;

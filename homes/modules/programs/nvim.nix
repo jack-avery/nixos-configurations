@@ -3,6 +3,38 @@
   config,
   ...
 }: {
+  home.packages = with pkgs; [
+    # rust ls
+    cargo
+    rustc
+    rustfmt
+    rust-analyzer
+
+    # python ls
+    (python3.withPackages (ps:
+      with ps; [
+        python-lsp-server
+        python-lsp-black
+        python-lsp-ruff
+        pyls-flake8
+        pyls-isort
+        isort
+        flake8
+        black
+      ]))
+
+    # nix ls
+    nil
+    alejandra
+
+    # go ls
+    gopls
+
+    # lua ls
+    lua-language-server
+    stylua
+  ];
+
   programs.neovim = {
     enable = true;
     vimAlias = false;
@@ -106,11 +138,11 @@
   xdg.configFile = {
     "nvim/lua/plugins" = {
       recursive = true;
-      source = ../../config/nvim/plugins;
+      source = ../../../config/nvim/plugins;
     };
     "nvim/after/ftplugin" = {
       recursive = true;
-      source = ../../config/nvim/ftplugin;
+      source = ../../../config/nvim/ftplugin;
     };
   };
 }

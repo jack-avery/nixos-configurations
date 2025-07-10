@@ -25,7 +25,7 @@
     nixosConfigurations = {
       nixdesk = nixpkgs.lib.nixosSystem {
         modules = [
-          ./modules/fonts.nix
+          ./systems/modules/fonts.nix
           ./systems/nixdesk/configuration.nix
         ];
       };
@@ -36,10 +36,12 @@
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          ./modules/programs/alacritty.nix
-          ./modules/programs/bash.nix
-          ./modules/programs/git.nix
-          ./modules/programs/nvim.nix
+          ./homes/modules/programs/alacritty.nix
+          ./homes/modules/programs/bash.nix
+          ./homes/modules/programs/git.nix
+          ./homes/modules/programs/nvim.nix
+
+          ./homes/modules/themes/adwaita-gruvbox.nix
 
           ./homes/jack.nix
         ];
