@@ -25,7 +25,7 @@
     nixosConfigurations = {
       nixdesk = nixpkgs.lib.nixosSystem {
         modules = [
-          ./globals/fonts.nix
+          ./modules/fonts.nix
           ./systems/nixdesk/configuration.nix
         ];
       };
