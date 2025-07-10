@@ -10,8 +10,9 @@ I use a flake-based system configuration. Regardless of whether you're using Nix
 
 Once that is done, if you're using NixOS, you can match my system using `sudo nixos-rebuild switch --flake .`. Note that this assumes you have my hardware configuration as well.
 
-If you're not on NixOS, you'll have to install [home-manager](https://nix-community.github.io/home-manager/). I use the Standalone installation. Once you have it set up, run `home-manager switch --flake .`, and resource your shell.
+If you're not on NixOS, you'll have to install [home-manager](https://nix-community.github.io/home-manager/). I use the Standalone installation. Once you have it set up, run `home-manager switch --flake . --impure`.
+> `--impure` is required due to NixGL.
 
 # Where?
 
-Sources for my NixOS and home-manager configurations are listed under `systems` and `homes`. You can see the ones for my current computer here: [NixOS](https://github.com/jack-avery/nixos-configurations/blob/main/systems/nixdesk/configuration.nix) [home-manager](https://github.com/jack-avery/nixos-configurations/blob/main/homes/jack/home.nix)
+Sources for my NixOS and home-manager configurations are listed under `systems` and `homes`. You can see the NixOS configuration for my current computer [here](https://github.com/jack-avery/nixos-configurations/blob/main/systems/nixdesk/configuration.nix). However, I've recently split apart and modularized my home-manager configuration, which should make it easier to look through and see what does what under `homes`.
