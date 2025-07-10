@@ -14,7 +14,7 @@
     home-manager,
     nixGL,
     ...
-  }@inputs: let
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -25,18 +25,25 @@
     nixosConfigurations = {
       nixdesk = nixpkgs.lib.nixosSystem {
         modules = [
-          ./globals/all.nix
+          ./globals/fonts.nix
           ./systems/nixdesk/configuration.nix
         ];
       };
     };
 
-    homeConfigurations."jack" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = {inherit inputs;};
-      modules = [
-        ./homes/jack/home.nix
-      ];
+    homeConfigurations = {
+      jack = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./modules/programs/alacritty.nix
+          ./modules/programs/bash.nix
+          ./modules/programs/git.nix
+          ./modules/programs/nvim.nix
+
+          ./homes/jack.nix
+        ];
+      };
     };
   };
 }

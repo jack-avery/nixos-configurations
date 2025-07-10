@@ -124,6 +124,7 @@
     bibata-cursors
     xsettingsd
     xorg.xrdb
+    rocmPackages.rocm-smi
   ];
 
   services.logrotate.checkConfig = false;
