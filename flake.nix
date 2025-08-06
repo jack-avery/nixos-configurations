@@ -47,6 +47,23 @@
           ./homes/jack.nix
         ];
       };
+
+      # my work laptop is mint using ubuntu. use adwaita-gruvbox instead
+      jack-workbook = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./homes/modules/programs/alacritty.nix
+          ./homes/modules/programs/bash.nix
+          ./homes/modules/programs/git.nix
+          ./homes/modules/programs/nvim.nix
+          ./homes/modules/programs/vscodium.nix
+
+          ./homes/modules/themes/adwaita-gruvbox.nix
+
+          ./homes/jack.nix
+        ];
+      };
     };
   };
 }
