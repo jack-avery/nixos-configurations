@@ -32,7 +32,7 @@
   fileSystems."/run/media/jack/T7" = {
     device = "/dev/disk/by-uuid/A07D-29EF";
     fsType = "exfat";
-    options = ["fmask=0077" "dmask=0077" "uid=1000" "gid=100"];
+    options = ["fmask=0022" "dmask=0022" "uid=1000" "gid=100"];
     noCheck = true; # fsck takes very long for this drive and systemd waits
   };
 
