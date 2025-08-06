@@ -6,7 +6,7 @@
 
   gtk = {
     enable = true;
-    theme.name = "Adwaita-dark";
+    theme.name = "Breeze";
     iconTheme.name = "Gruvbox-Plus-Dark";
     gtk3 = {
       bookmarks = [
@@ -24,7 +24,7 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita";
-    style.name = "adwaita-dark";
+    platformTheme.name = "kde6";
+    style.name = "breeze";
   };
 }
