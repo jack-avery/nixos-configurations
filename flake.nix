@@ -40,8 +40,9 @@
           ./homes/modules/programs/bash.nix
           ./homes/modules/programs/git.nix
           ./homes/modules/programs/nvim.nix
+          ./homes/modules/programs/vscodium.nix
 
-          ./homes/modules/themes/adwaita-gruvbox.nix
+          ./homes/modules/themes/breeze-gruvbox.nix
 
           ./homes/jack.nix
         ];
