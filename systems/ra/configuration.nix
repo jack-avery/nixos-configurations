@@ -6,7 +6,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixdesk";
+  networking.hostName = "ra";
   networking.dhcpcd.enable = true;
 
   time.timeZone = "Canada/Eastern";
@@ -65,6 +65,7 @@
       libreoffice
       gpu-screen-recorder-gtk
       easyeffects
+      gale
     ];
   };
   programs.steam = {

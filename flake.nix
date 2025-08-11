@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixGL.url = "github:nix-community/nixGL";
@@ -11,6 +12,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     nixGL,
     ...
@@ -19,14 +21,24 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = [nixGL.overlay];
+      overlays = [
+        nixGL.overlay
+      ];
     };
   in {
     nixosConfigurations = {
-      nixdesk = nixpkgs.lib.nixosSystem {
+      ra = nixpkgs.lib.nixosSystem {
         modules = [
           ./systems/modules/fonts.nix
-          ./systems/nixdesk/configuration.nix
+          ./systems/ra/configuration.nix
+
+          {
+            nixpkgs.overlays = [
+              (self: super: {
+                gale = nixpkgs-unstable.legacyPackages.x86_64-linux.gale;
+              })
+            ];
+          }
         ];
       };
     };
